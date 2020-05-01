@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>Dashboard | Event Management</title>
+  <%= javascript_include_tag :defaults %>
+  <!--=== CSS ===-->
+  <%= stylesheet_link_tag "css/bootstrap.min" %>
+  <!-- Bootstrap -->
+  <!-- <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" /> -->
+  <!-- jQuery UI -->
+  <!--<link href="../assets/jquery-ui/jquery-ui-1.10.2.custom.css" rel="stylesheet" type="text/css" />-->
+  <!--[if lt IE 9]>
+    <link rel="stylesheet" type="text/css" href="../assets/jquery-ui/jquery.ui.1.10.2.ie.css"/>
+  <![endif]-->
+  <!-- Theme -->
+  <%= stylesheet_link_tag "css/main", "css/plugins", "css/responsive", "css/icons" %>
+  <!--link href="../assets/css/main.css" rel="stylesheet" type="text/css" />
+  <link href="../assets/css/plugins.css" rel="stylesheet" type="text/css" />
+  <link href="../assets/css/responsive.css" rel="stylesheet" type="text/css" />
+  <link href="../assets/css/icons.css" rel="stylesheet" type="text/css" /-->
+  <%= stylesheet_link_tag "css/plugins/pickadate-classic", "css/plugins/pickadate-classic-date", "css/plugins/pickadate-classic-time" %>
+  <%= stylesheet_link_tag "css/fontawesome/font-awesome.min" %>
+  <!-- <link rel="stylesheet" href="../assets/css/fontawesome/font-awesome.min.css"> -->
+  <!--[if IE 7]>
+    <link rel="stylesheet" href="../assets/css/fontawesome/font-awesome-ie7.min.css">
+  <![endif]-->
+  <!--[if IE 8]>
+    <link href="../assets/css/ie8.css" rel="stylesheet" type="text/css" />
+  <![endif]-->
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+  <!--=== JavaScript ===-->
+  <%= javascript_include_tag "js/libs/jquery-1.10.2.min", "jquery-ui/jquery-ui-1.10.2.custom.min"  %>
+  <!--script type="text/javascript" src="../assets/js/libs/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" src="../assets/jquery-ui/jquery-ui-1.10.2.custom.min.js"></script-->
+  <%= javascript_include_tag "js/bootstrap.min", "js/libs/lodash.compat.min"  %>
+  <!--script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../assets/js/libs/lodash.compat.min.js"></script-->
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="../assets/js/libs/html5shiv.js"></script>
+  <![endif]-->
+  <!-- Smartphone Touch Events -->
+  <%= javascript_include_tag "touchpunch/jquery.ui.touch-punch.min", "event.swipe/jquery.event.move", "event.swipe/jquery.event.swipe" %>
+  <!--script type="text/javascript" src="../assets/touchpunch/jquery.ui.touch-punch.min.js"></script>
+  <script type="text/javascript" src="../assets/event.swipe/jquery.event.move.js"></script>
+  <script type="text/javascript" src="../assets/event.swipe/jquery.event.swipe.js"></script-->
+  <!-- General -->
+  <%= javascript_include_tag "js/libs/breakpoints", "respond/respond.min" %>
+  <!--script type="text/javascript" src="../assets/js/libs/breakpoints.js"></script>
+  <script type="text/javascript" src="../assets/respond/respond.min.js"></script--> <!-- Polyfill for min/max-width CSS3 Media Queries (only for IE8) -->
+   <%= javascript_include_tag "cookie/jquery.cookie.min", "slimscroll/jquery.slimscroll.min", "slimscroll/jquery.slimscroll.horizontal.min" %>
+  <!--script type="text/javascript" src="../assets/cookie/jquery.cookie.min.js"></script>
+  <script type="text/javascript" src="../assets/slimscroll/jquery.slimscroll.min.js"></script>
+  <script type="text/javascript" src="../assets/slimscroll/jquery.slimscroll.horizontal.min.js"></script-->
+  <!-- Page specific plugins -->
+  <!-- Charts -->
+  <!--[if lt IE 9]>
+    <script type="text/javascript" src="../assets/flot/excanvas.min.js"></script>
+  <![endif]-->
+  <!--
+  <script type="text/javascript" src="../assets/sparkline/jquery.sparkline.min.js"></script>
+  <script type="text/javascript" src="../assets/flot/jquery.flot.min.js"></script>
+  <script type="text/javascript" src="../assets/flot/jquery.flot.tooltip.min.js"></script>
+  <script type="text/javascript" src="../assets/flot/jquery.flot.resize.min.js"></script>
+  <script type="text/javascript" src="../assets/flot/jquery.flot.time.min.js"></script>
+  <script type="text/javascript" src="../assets/flot/jquery.flot.growraf.min.js"></script>
+  <script type="text/javascript" src="../assets/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+  -->
+  <%= javascript_include_tag "daterangepicker/moment.min", "daterangepicker/daterangepicker", "blockui/jquery.blockUI.min", "fullcalendar/fullcalendar.min" %>
+  <!--script type="text/javascript" src="../assets/daterangepicker/moment.min.js"></script>
+  <script type="text/javascript" src="../assets/daterangepicker/daterangepicker.js"></script>
+  <script type="text/javascript" src="../assets/blockui/jquery.blockUI.min.js"></script>
+  <script type="text/javascript" src="../assets/fullcalendar/fullcalendar.min.js"></script-->
+  <%= javascript_include_tag "pickadate/picker", "pickadate/picker.date", "pickadate/picker.time" %>
+  <!-- Noty -->
+  <%= javascript_include_tag "noty/jquery.noty", "noty/layouts/top", "noty/themes/default" %>
+  <!--script type="text/javascript" src="../assets/noty/jquery.noty.js"></script>
+  <script type="text/javascript" src="../assets/noty/layouts/top.js"></script>
+  <script type="text/javascript" src="../assets/noty/themes/default.js"></script-->
+  <!-- Forms -->
+  <%= javascript_include_tag "uniform/jquery.uniform.min", "select2/select2.min" %>
+  <!--script type="text/javascript" src="../assets/uniform/jquery.uniform.min.js"></script>
+  <script type="text/javascript" src="../assets/select2/select2.min.js"></script-->
+  <!-- App -->
+  <%= javascript_include_tag "js/app", "js/plugins", "js/plugins.form-components", "bootbox/bootbox" %>
+  <!--script type="text/javascript" src="../assets/js/app.js"></script>
+  <script type="text/javascript" src="../assets/js/plugins.js"></script>
+  <script type="text/javascript" src="../assets/js/plugins.form-components.js"></script-->
+  <%= javascript_include_tag "js/jquery.maskMoney.min" %>
+  <script>
+    $(document).ready(function(){
+      "use strict";
+      App.init(); // Init layout and core plugins
+      Plugins.init(); // Init all plugins
+      FormComponents.init(); // Init all form-specific plugins
+      $('.datepicker').datepicker({
+        dateFormat: "yy-mm-dd",
+        prevText : '<i class="fa fa-chevron-left"></i>',
+        nextText : '<i class="fa fa-chevron-right"></i>'
+      });
+    });
+  </script>
+  <!-- Demo JS -->
+  <!--
+  <script type="text/javascript" src="../assets/js/custom.js"></script>
+  <script type="text/javascript" src="../assets/js/demo/pages_calendar.js"></script>
+  <script type="text/javascript" src="../assets/js/demo/charts/chart_filled_blue.js"></script>
+  <script type="text/javascript" src="../assets/js/demo/charts/chart_simple.js"></script>
+  -->
+  <style type="text/css">
+    .add-agenda{
+      padding: 10px;
+    }
+
+    .add-programme{
+      margin-right: -12px;
+      margin-bottom: 10px;
+    }
+
+    .btn-primary{
+      border-color: #00a4e6 !important;
+      background-color: #00a4e6 !important;
+    }
+
+    .btn-primary:hover{
+      background-color: #428bca !important;
+      border-color: #428bca !important;
+    }
+
+    .navbar .navbar-brand span{
+      /*display: block;*/
+      font-size: 20px;
+      /*line-height: 16px;*/
+      display: -webkit-inline-box;
+    }
+
+    .navbar .navbar-brand{
+      line-height: 0px;
+      height: 48px;
+      padding-top: 4px;
+      width: 330px !important;
+    }
+
+    .navbar .navbar-brand img{
+      /*margin-left: 20px;*/
+      /*width: 90px;*/
+    }
+
+    .list-group-item {
+      z-index: 2;
+    }
+
+    .clear-space{
+      height: 10px;
+    }
+
+    .no-border{
+      border-bottom: 0px !important;
+    }
+
+    .align-left{
+      text-align: left !important;
+    }
+
+    .align-right{
+      text-align: right !important;
+    }
+
+    .float-right{
+      float: right; 
+    }
+
+    .badge-trash{
+      float: right;
+    }
+
+    .list-group-item.active{
+      border-color: #00a4e6 !important;
+      background-color: #00a4e6 !important;
+    }
+
+    .list-group-item.active a{
+      color: #fff !important;
+    }
+
+    .navbar {
+      background: #00a4e6;
+      border-bottom: 4px solid #003762;
+    }
+
+    input:focus{
+      border-color: #00a4e6 !important;
+    }
+
+    .tabbable-custom > .nav-tabs > li.active {
+      border-top: 3px solid #00a4e6;
+    }
+
+    .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+      background-color: #00a4e6;
+      border-color: #00a4e6;
+    }
+    .visual img{
+
+    }
+  </style>
+</head>
+
+<% if params[:controller] == 'event' %>
+  <body onload="initialize()">
+<% else %>
+  <body>
+<% end %>
+  <!-- Header -->
+  <header class="header navbar navbar-fixed-top" role="banner">
+    <%= render 'layouts/header' %>
+  </header> 
+  <!-- /.header -->
+  <div id="container" class="fixed-header sidebar-closed">
+    <div id="sidebar" class="sidebar-fixed">
+      <%= render 'layouts/sidebar' %>
+    </div>
+    <!-- /Sidebar -->
+    <div id="content">
+      <div id="main-content" class="container">
+        <div class="alert" style="display:none"></div>
+        <% if flash.present? %>
+          <% alert = flash[:error].present? ? 'danger' : 'success' %>
+          <div class="alert alert-<%= alert %> fade in" id="flash_notice">
+            <i class="icon-remove close" data-dismiss="alert"></i>
+            <%= flash[:error].present? ? flash[:error] : flash[:notice] %>
+          </div>
+        <% end %>
+        <!-- Breadcrumbs line -->
+        <%#= render 'layouts/breadcrumb' %>
+        <!-- /Breadcrumbs line -->
+        <!--=== Page Content ===-->
+        <%= yield %>
+        <!-- /Page Content -->
+      </div>
+      <!-- /.container -->
+    </div>
+  </div>
+  <%= javascript_include_tag "application" %>
+</body>
+</html>

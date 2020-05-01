@@ -1,0 +1,24 @@
+<tr class="nested-fields">
+    <td width="20" style="vertical-align:middle">
+        <%= f.options[:child_index]+1 %>
+    </td>
+    <td style="vertical-align:middle" width="50" align="center">
+      <div class="visual">
+        <%= image_tag(f.object.avatar_url) %>
+      </div>
+    </td>
+    <td style="vertical-align:middle">
+      <%= f.object.name.try(:titleize) %>
+    </td>
+    <td class="align-center" width="260" style="vertical-align:middle">
+        <%= f.object.email %>
+    </td>
+    <td class="align-center" width="180" style="vertical-align:middle">
+        <%= f.object.category.name.try(:titleize) %>
+    </td>
+    <td class="align-center" width="80" style="vertical-align:middle">
+        <a class="bs-tooltip" title="Edit" class="btn btn-xs" data-toggle="modal"  href="#edit-attendee-<%= f.object.id %>"><i class="icon-pencil"></i></a>
+        <%= link_to raw('<i class="icon-trash"></i>'),  event_attendee_path(@event.id, f.object.id),  method: :delete, data: { confirm: 'Are you sure?' }, class:  'bs-tooltip', title: 'Delete'  %>
+    </td>
+</tr>
+<%= render partial: 'edit_attendee',  locals: { f: f }%>

@@ -1,0 +1,79 @@
+<!--=== Inline Tabs ===-->
+<div class="row">
+    <div class="col-md-12">
+        <%= render 'events/page_header' %>
+        <!-- Tabs-->
+        <div class="tabbable tabbable-custom tabbable-full-width">
+            <%= render 'events/nav_tabs' %>
+            <div class="tab-content row">
+                <!--=== Overview ===-->
+                <div class="tab-pane" id="tab_overview">
+                </div>
+                <!-- /Overview -->
+                <!--=== Edit Account ===-->
+                <div class="tab-pane active" id="tab-event-general">
+                    <%= render 'left_menu' %>
+                    <div class="col-md-12">
+                        <div class="row profile-info">
+                            <div class="col-md-9">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="widget">
+                                            <div class="widget-header no-border">
+                                                <h4>Cost Summary</h4>
+                                            </div>
+                                            <div class="widget-content">
+                                                <div class="panel-group" id="accordion">
+                                                    <% @production_types.each do |type| %>
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title">
+                                                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#production-<%= type.id %>">
+                                                                        <%= type.name %>
+                                                                    </a>
+                                                                    <span class="float-right"><%= format_currency(@event.productions.in_type(type.code).sum(:total)) %></span>
+                                                                </h3>
+                                                            </div>
+                                                            <div id="production-<%= type.id %>" class="panel-collapse collapse" style="height: 0px;">
+                                                                <div class="panel-body">
+                                                                    <% @event.productions.in_type(type.code).each do |item| %>
+                                                                        <div class="form-group">
+                                                                            <div class="row">
+                                                                                <div class="col-md-6">
+                                                                                    <%= item.production_item.name %>
+                                                                                </div>
+                                                                                <div class="col-md-6 align-right">
+                                                                                    <%= format_currency(item.total) %>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    <% end %>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <% end %>
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <h3 class="panel-title">
+                                                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#">
+                                                                    Total
+                                                                </a>
+                                                                <span class="float-right"><%= format_currency(@event.productions.sum(:total)) %></span>
+                                                            </h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> <!-- /.widget-content -->
+                                        </div> <!-- /.widget .box -->
+                                    </div> <!-- /.col-md-12 -->
+                                </div>
+                            </div>
+                        </div> <!-- /.row -->
+                    </div> <!-- /.col-md-9 -->
+                </div>
+                <!-- /Edit Account -->
+            </div> <!-- /.tab-content -->
+        </div>
+        <!--END TABS-->
+    </div>
+</div> <!-- /.row -->

@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-md-12">
+    <%= render 'events/page_header' %>
+    <!-- Tabs-->
+    <div class="tabbable tabbable-custom tabbable-full-width">
+      <%= render 'events/nav_tabs' %>
+      <div class="tab-content row">
+        <div class="tab-pane active" id="tab-event-general">
+          <!-- <div class="col-md-12"> -->
+          <div class="col-md-12 form-vertical no-margin">
+            <div class="widget">
+              <div class="widget-content">
+                <div class="row">
+                  <!--=== Advanced Table ===-->
+                  <div class="col-md-12">
+                    <div class="widget">
+                      <div class="widget-header no-border">
+                        <h4>Message List</h4>
+                        <div class="toolbar no-padding">
+                          <div class="btn-group">
+                            <button class="btn dropdown-toggle" data-toggle="dropdown">
+                              <i class="icon-plus"></i> Add Message
+                              <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu pull-right" style="text-align: left;">
+                              <li>
+                                <%= link_to raw("<i class=icon-bullhorn></i> Create New Message"), "#", "data-href" => new_event_message_path, 'data-toggle' =>  "modal" %>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="widget-content">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label>
+                              <%= form_tag event_messages_path(@event.id), :method => 'get', :remote => true do %>
+                                <div class="input-group"><span class="input-group-addon"><i class="icon-search"></i></span>
+                                  <%= text_field_tag :search, params[:search], :class => "form-control", "aria-controls" => "DataTables_Table_0" %>
+                                </div>
+                              <% end %>
+                            </label>
+                          </div>
+                        </div>
+                        <div id="message-list">
+                          <%= render 'list', :messages => @messages %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /Advanced Table -->
+                </div>
+              </div> <!-- /.widget-content -->
+            </div> <!-- /.widget -->
+          </div> <!-- /.col-md-12 -->
+        </div>
+      </div> <!-- /.tab-content -->
+    </div>
+    <!--END TABS-->
+  </div>
+</div> <!-- /.row -->
+
+<%= javascript_include_tag 'custom/messages/messages' %>

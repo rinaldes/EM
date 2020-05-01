@@ -1,0 +1,35 @@
+<ul class="nav nav-tabs">
+  <% if current_user.is_admin? %>
+    <li class="<%= 'active' if params[:controller] == 'events' %>"><%= link_to 'General',(@event.new_record? ? new_event_path : edit_event_path(@event.id)) %></li>
+    <li class="<%= 'active' if params[:controller] == 'agendas' %>"><%= link_to 'Agenda',(@event.new_record? ? "javascript:void(0);" : edit_event_agendas_path(@event.id)) %></li>
+    <li class="<%= 'active' if params[:controller] == 'attendees' %>"><%= link_to 'Attendee', (@event.new_record? ? "javascript:void(0);" : edit_event_attendees_path(@event.id)) %></li>
+    <li class="<%= 'active' if params[:controller] == 'productions' %>"><%= link_to 'Production', (@event.new_record? ? "javascript:void(0);" : event_productions_path(@event.id)) %></li>
+    <li class="<%= 'active' if params[:controller] == 'realizations' %>"><%= link_to 'Realization', (@event.new_record? ? "javascript:void(0);" : event_realizations_path(@event.id)) %></li>
+    <li class="<%= 'active' if params[:controller] == 'session_feedbacks' %>"><%= link_to 'Session Feedback', (@event.new_record? ? "javascript:void(0);" : new_event_session_feedback_path(@event.id)) %></li>
+    <% if !@event.new_record? %>
+      <li>
+        <a href="#" data-toggle="tab" class="confirm-dialog">Submit</a>
+        <%#= link_to "Submit", event_submit_path(@event.id), "data-toggle" => "tab", :class => "confirm-dialog"%>
+      </li>
+    <% end %>
+  <% end %>
+
+  <% if @event.is_submitted? && (current_user.is_admin? || current_user.is_admin_event?(current_user, @event)) %>
+    <li class="<%= 'active' if params[:controller] == 'sessions' %>"><%= link_to 'Registration', (@event.new_record? ? "javascript:void(0);" : event_sessions_path(@event.id)) %></li>
+    <li class="<%= 'active' if params[:controller] == 'questions' %>"><%= link_to 'Questions', (@event.new_record? ? "javascript:void(0);" : event_questions_path(@event.id)) %></li>
+    <li class="<%= 'active' if params[:controller] == 'files' %>"><%= link_to 'File', (@event.new_record? ? "javascript:void(0);" : event_files_path(@event.id)) %></li>
+    <li class="<%= 'active' if params[:controller] == 'messages' %>"><%= link_to 'Message',(@event.new_record? ? "javascript:void(0);" :  event_messages_path(@event.id)) %></li>
+  <% end %>
+</ul>
+
+<% if !@event.new_record? %>
+  <script type="text/javascript">
+    $("a.confirm-dialog").click(function(e) {
+      e.preventDefault();
+      var link = "<%= event_submit_event_path(@event.id) %>"
+      bootbox.confirm("Are you sure?", function(result) {
+        if(result) window.location = link;
+      });
+    });
+  </script>
+<% end %>

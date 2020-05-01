@@ -1,0 +1,90 @@
+<!--=== Inline Tabs ===-->
+<div class="row">
+    <div class="col-md-12">
+    <%= render 'events/page_header' %>
+        <!-- Tabs-->
+        <div class="tabbable tabbable-custom tabbable-full-width">
+            <%= render 'events/nav_tabs' %>
+            <div class="tab-content row">
+                <!--=== Overview ===-->
+                <div class="tab-pane" id="tab_overview">
+                </div>
+                <!-- /Overview -->
+                <!--=== Edit Account ===-->
+                <div class="tab-pane active" id="tab-event-general">
+                    <%= render 'left_menu' %>
+                    <div class="col-md-12">
+                        <div class="row profile-info">
+                            <div class="col-md-9">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="widget">
+                                            <div class="widget-header no-border">
+                                                <h4> <%= get_production_type_name(@production_type) %></h4>
+                                                <div class="toolbar no-padding">
+                                                    <div class="btn-group">
+                                                        <button class="btn" data-toggle="modal" href="#add-production-dialog">
+                                                            <i class="icon-plus"></i> Add Items
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="widget-content">
+                                                <%= form_for @event, url: event_productions_path(@event.id), html: {class: "form-horizontal row-border", id: "event-general-form"} do |f| %>
+                                                    <table class="table table-striped table-bordered table-checkable table-highlight-head table-no-inner-border table-hover">
+                                                        <thead>
+                                                            <tr >
+                                                                <th class="align-center">Name</th>
+                                                                <th class="align-center">Qty</th>
+                                                                <% if @production_type == 'accomodation' %>
+                                                                    <th class="align-center">Days</th>
+                                                                <% end %>
+                                                                <th class="align-center">Price</th>
+                                                                <th class="align-center">Total</th>
+                                                                <th class="align-center">Notes</th>
+                                                                <th class="align-center"></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <% if f.object.productions.in_type(@production_type).present? %>
+                                                                <%= f.fields_for :productions, f.object.productions.in_type(@production_type).order("created_at ASC") do |production| %>
+                                                                    <%= render 'production_fields', f: production %>
+                                                                <% end %>
+                                                            <% else %>
+                                                                <tr>
+                                                                    <% if @production_type == 'accomodation' %>
+                                                                        <td colspan="7" align="center">
+                                                                    <% else %>
+                                                                        <td colspan="6" align="center">
+                                                                    <% end %>
+                                                                    No production yet!</td></tr>
+                                                            <% end %>
+                                                            <tr>
+                                                                <% if @production_type == 'accomodation' %>
+                                                                    <th colspan="4" class="align-center">
+                                                                <% else %>
+                                                                    <th colspan="3" class="align-center">
+                                                                <% end %>
+                                                                Total</th>
+                                                                <th class="align-right"><%= format_currency(f.object.productions.in_type(@production_type).sum(:total)) %></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                <% end %>
+                                            </div>
+                                        </div> <!-- /.widget .box -->
+                                    </div> <!-- /.col-md-12 -->
+                                </div>
+                            </div>
+                        </div> <!-- /.row -->
+                    </div> <!-- /.col-md-9 -->
+                </div>
+                <!-- /Edit Account -->
+            </div> <!-- /.tab-content -->
+        </div>
+        <!--END TABS-->
+    </div>
+</div> <!-- /.row -->
+<%= render 'new_production' %>

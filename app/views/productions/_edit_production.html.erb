@@ -1,0 +1,47 @@
+<div class="modal fade" id="edit-production-<%= f.object.id %>">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Edit Item</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Item <span class="required">*</span></label>
+                    <div class="col-md-9">
+                        <%= f.select :production_item_id, options_for_select(ProductionItem.all.map{ |c| [c.name, c.id] }, f.object.production_item_id), {:prompt => 'Select Item name'}, { :class => 'form-control' } %>
+                    </div>
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-9">
+                        <%= text_field_tag :new_item, "", class: "form-control", placeholder: 'Enter Customize Item Name' %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Quantitiy <span class="required">*</span></label>
+                    <div class="col-md-9">
+                        <%= f.text_field :quantity, class: "form-control numeric" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Price <span class="required">*</span></label>
+                    <div class="col-md-9">
+                        <%= f.text_field :price, class: "form-control numeric" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Notes</label>
+                    <div class="col-md-9">
+                        <%= f.text_field :notes, class: "form-control" %>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <%= f.submit "Save Item", name: 'save', class: "btn btn-primary pull-right", data: { :disable_with => "Please wait..." }%>
+                <%= f.hidden_field :event_id, :value => @event.id %>
+                <%= f.hidden_field :production_type_id, :value => f.object.production_type_id %>
+                <%= hidden_field_tag 'type', @production_type %>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>

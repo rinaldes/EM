@@ -1,0 +1,1 @@
+<%= select_tag :programme_id, options_from_collection_for_select(@programmes, "id", "title"), :prompt => 'Select Programme', :class => 'form-control', :onchange => "questions(#{@event.id});" %>

@@ -1,0 +1,55 @@
+<div class="modal fade" id="edit-attendee-<%= f.object.id %>">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Edit Attendee</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label ali">Name</label>
+                    <div class="col-md-9">
+                    <%= f.text_field :name, class: "form-control" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Email <span class="required">*</span></label>
+                    <div class="col-md-9">
+                        <%= f.text_field :email, class: "form-control" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Phone</label>
+                    <div class="col-md-9">
+                        <%= f.text_field :phone, class: "form-control" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Category</label>
+                    <div class="col-md-9">
+                        <%= f.select :category_id, options_for_select(Category.all.map{ |c| [c.name, c.id] }, f.object.category_id), {:prompt => 'Select Category'}, { :class => 'form-control' } %>
+                    </div>
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-9">
+                        <%= text_field_tag :new_category, "", class: "form-control", placeholder: 'Enter Customize Category Name' %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Photo </label>
+                    <div class="col-md-9">
+                        <%= f.file_field :avatar, class: "form-control" %>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <%= f.submit "Save Item", name: 'save', class: "btn btn-primary pull-right", data: { :disable_with => "Please wait..." }%>
+                <%= f.hidden_field :event_id, :value => @event.id %>
+                <%#= f.hidden_field :production_type_id, :value => f.object.production_type_id %>
+                <%#= hidden_field_tag 'type', @production_type %>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>

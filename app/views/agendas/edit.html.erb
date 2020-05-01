@@ -1,0 +1,61 @@
+<!--=== Inline Tabs ===-->
+<div class="row">
+    <div class="col-md-12">
+        <%= render 'events/page_header' %>
+        <!-- Tabs-->
+        <div class="tabbable tabbable-custom tabbable-full-width">
+            <%= render 'events/nav_tabs' %>
+            <div class="tab-content row">
+                <!--=== Overview ===-->
+                <div class="tab-pane" id="tab_overview">
+                </div>
+                <!-- /Overview -->
+                <!--=== Agendas ===-->
+                <div class="tab-pane active" id="tab-event-general">
+                    <div class="col-md-3">
+                        <%= render 'left_menu' %>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row profile-info">
+
+                            <div class="col-md-9">
+                                <div class="row add-agenda">
+                                    <div class="col-md-9">
+                                        <h4>General Information </h4>
+                                    </div>
+                                    <div class="col-md-3 align-right">
+                                        <button class="btn" data-toggle="modal" href="#event-agenda-dialog">
+                                           <i class="icon-plus"></i> Add Agenda
+                                        </button>
+                                    </div>
+                                </div>
+                                <%= form_for @event, url: event_agendas_path(@event.id), html: {class: "form-horizontal row-border", id: "event-general-form"} do |f| %>
+                                    <% if f.object.agendas.in_date(@event_date).present? %>
+                                        <%= f.fields_for :agendas , f.object.agendas.in_date(@event_date).order("start_time ASC") do |agenda| %>
+                                            <%= render 'agenda_fields', f: agenda %>
+                                        <% end %>
+                                    <% else %>
+                                        <div class="widget box">
+                                            <div class="widget-header">
+                                                <div class="toolbar no-padding">
+                                                    <div class="btn-group">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="widget-content align-center">
+                                                <p>You don't have any Agenda event yet.</p>
+                                            </div>
+                                        </div>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                        </div> <!-- /.row -->
+                    </div> <!-- /.col-md-9 -->
+                </div>
+                <!-- /Agendas -->
+            </div> <!-- /.tab-content -->
+        </div>
+        <!--END TABS-->
+    </div>
+</div> <!-- /.row -->
+<%= render 'agenda_new' %>

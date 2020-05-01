@@ -1,0 +1,72 @@
+<div class="col-md-9">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget">
+                <div class="widget-content">
+
+                    <div class="form-group <%= 'has-error' unless @event.errors.messages[:description].blank? %>">
+                        <div class="col-md-12">
+                            <label class="control-label">Questions<span class="required">*</span></label>
+                            <div class="clear-space"></div>
+                            <%= f.cktext_area :question, :class => 'ckeditor', :ckeditor => {:toolbar => 'mini'} %>
+                            <label for="req1" generated="true" class="has-error help-block">
+                                <%= "Description #{@event.errors.messages[:description].first}" unless @event.errors.messages[:description].blank? %>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label align-left">Session</label>
+                        <div class="col-md-11 left">
+                            <%= f.select :programme_id, options_for_select(@sessions.map{ |c| [c.title, c.id] }), {:prompt => 'Select Your Event Session'}, { :class => 'form-control' } %>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label align-left">Type</label>
+                        <div class="col-md-11 left">
+                            <%= f.select :answer_type, options_for_select(ANSWER_TYPE, :selected => f.object.answer_type), {}, { :class => 'form-control select-answer-type',  :style => "width:230px" } %>
+                        </div>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </div>
+    <div class="row answer-option">
+        <div class="col-md-12">
+            <div class="widget">
+                <div class="widget-header no-border">
+                    <label class="control-label">Answer Option</label>
+                    <div class="toolbar no-padding">
+                        <div class="btn-group">
+                            <%= link_to_add_association raw("<i class='icon-plus'></i> Add Answer"), f, :session_feedback_options,:"data-association-insertion-node" => "tbody#session-feedback-options", :"data-association-insertion-method" => "append", :partial => "new_option_fields", :class => "btn" %>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content">
+                    <table class="table table-striped table-bordered table-checkable table-highlight-head table-no-inner-border table-hover">
+                        <thead>
+                            <tr>
+                                <th>Answer</th>
+                                  <th class="align-center"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="session-feedback-options">
+                            <% if params[:action] == 'new' %>
+                                <%= f.fields_for :session_feedback_options, f.object.session_feedback_options.build do |option| %>
+                                    <%= render 'new_option_fields', f: option %>
+                                <% end %>
+                            <% else %>
+                                <%= f.fields_for :session_feedback_options do |option| %>
+                                    <%= render 'new_option_fields', f: option %>
+                                <% end %>
+                            <% end %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="form-actions widget-content align-center">
+    <%= link_to "Cancel",  events_path, class: "btn" %>
+    <span style="padding-left: 10px; padding-right: 10px;">Or</span>
+    <%= f.submit "Save & Next", class: "btn btn-primary", data: { :disable_with => "Please wait..." }%>
+</div>

@@ -1,0 +1,30 @@
+<!--=== Inline Tabs ===-->
+<div class="row">
+    <div class="col-md-12">
+    <%= render 'events/page_header' %>
+        <!-- Tabs-->
+        <div class="tabbable tabbable-custom tabbable-full-width">
+            <%= render 'events/nav_tabs' %>
+            <div class="tab-content row">
+                <!--=== Overview ===-->
+                <div class="tab-pane" id="tab_overview">
+                </div>
+                <!-- /Overview -->
+                <!--=== Edit Account ===-->
+                <div class="tab-pane active" id="tab-event-general">
+                    <%= render 'left_menu' %>
+                        <div class="col-md-12">
+                            <div class="row profile-info">
+                                <%= form_for @session_feedback, url: event_session_feedbacks_path(@event.id), html: {class: "form-horizontal row-border", id: "event-general-form"} do |f| %>
+                                    <%= render partial: 'form',  locals: { f: f }%>
+                                <% end %>
+                            </div>
+                        </div> <!-- /.row -->
+                    </div> <!-- /.col-md-9 -->
+                </div>
+                <!-- /Edit Account -->
+            </div> <!-- /.tab-content -->
+        </div>
+        <!--END TABS-->
+    </div>
+</div> <!-- /.row -->

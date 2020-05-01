@@ -1,0 +1,33 @@
+<table class="table table-striped table-bordered table-checkable table-highlight-head table-no-inner-border table-hover">
+  <thead>
+    <tr>
+      <th class="align-center">No.</th>
+      <th class="align-center" colspan="2">Participant</th>
+      <th class="align-center">Programme</th>
+      <th class="align-center">Question</th>
+      <!-- <th class="align-center">Vote Number</th> -->
+      <th class="align-center">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if questions.present? %>
+      <% questions.each_with_index do |question, index| %>
+        <tr>
+          <td class="align-center"><%= index+1%></td>
+          <td style="vertical-align:middle" width="50" align="center">
+            <div class="visual">
+              <%= image_tag(question.user.try(:avatar_url)) %>
+            </div>
+          </td>
+          <td><%= question.user.try(:name).try(:titleize) %></td>
+          <td><%= question.programme.try(:title).try(:titleize) %></td>
+          <td><%= question.question.try(:titleize) %></td>
+          <!-- <td><%= question.vote_number %></td> -->
+          <td><%= question.status.eql?("answered") ? question.status.titleize : (link_to raw('<button class=btn>Answer</button>'),  change_status_event_questions_path(@event.id, :id => question.id), :remote => true) %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr><td colspan="4" class="align-center">Question empty</td></tr>
+    <% end %>
+  </tbody>
+</table>

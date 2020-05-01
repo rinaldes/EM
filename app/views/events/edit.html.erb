@@ -1,0 +1,32 @@
+<!--=== Inline Tabs ===-->
+<div class="row">
+  <div class="col-md-12">
+    <%= render 'events/page_header' %>
+    <!-- Tabs-->
+    <div class="tabbable tabbable-custom tabbable-full-width">
+      <%= render 'events/nav_tabs' %>
+      <div class="tab-content row">
+        <!--=== Overview ===-->
+        <div class="tab-pane" id="tab_overview">
+        </div>
+        <!-- /Overview -->
+        <!--=== Event Generat ===-->
+        <div class="tab-pane active" id="tab-event-general">
+          <%= form_for @event, url: event_path, html: {class: "form-horizontal", id: "event-general-form"} do |f| %>
+            <!-- <div class="col-md-12"> -->
+            <div class="col-md-12 form-vertical no-margin">
+              <%= render partial: 'form',  locals: { f: f }%>
+              <div class="form-actions widget-content align-center">
+                <%= link_to "Cancel",  events_path, class: "btn" %>
+                <span style="padding-left: 10px; padding-right: 10px;">Or</span>
+                <%= f.submit "Update", name: 'update', class: "btn btn-primary", data: { :disable_with => "Please wait..." }%>
+              </div>
+            </div> <!-- /.col-md-12 -->
+          <% end %>
+        </div>
+      <!-- /Event General -->
+      </div> <!-- /.tab-content -->
+    </div>
+  <!--END TABS-->
+  </div>
+</div> <!-- /.row -->

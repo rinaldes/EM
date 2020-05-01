@@ -1,0 +1,25 @@
+<% unless @events.blank? %>
+  <% @events.each do |event| %>
+    <tr>
+      <td style="vertical-align:middle" width="100" align="center">
+        <div class="visual">
+          <%= image_tag(event.cover_url) %>
+        </div>
+      </td>
+      <td style="vertical-align:middle">
+        <p><%= link_to event.name.try(:titleize), edit_event_path(event.id), class:  'bs-tooltip', title: 'Show' %></p>
+        <p><%= event.start_date %>  -  <%= event.end_date %></p>
+      </td>
+      <td class="align-right style="vertical-align:middle"">
+        <p><%= event.status.try(:titleize) %></p>
+        <p>
+          <%= link_to raw('<i class="icon-eye-open"></i>'), edit_event_path(event.id), class:  'bs-tooltip', title: 'Show' %>
+          <%= link_to raw('<i class="icon-pencil"></i>'), edit_event_path(event.id), class:  'bs-tooltip', title: 'Edit' %>
+          <%= link_to raw('<i class="icon-trash"></i>'),  event_path(event.id),  method: :delete, data: { confirm: 'Are you sure?' }, class:  'bs-tooltip', title: 'Delete'  %>
+        </p>
+      </td>
+    </tr>
+  <% end %>
+<% else %>
+  <tr><td colspan="3"class="align-center">No event yet!</td></tr>
+<% end %>

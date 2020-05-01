@@ -1,0 +1,70 @@
+<div class="widget box nested-fields">
+    <div class="widget-header">
+        <h4><%= f.object.title.try(:titleize) %>&nbsp;&nbsp;&nbsp;&nbsp;
+            <i class="icon-time"></i><%= format_time(f.object.start_time) %> <%= "- #{format_time(f.object.end_time)}"  %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon- icon-location-arrow"></i> <%= f.object.place %>
+        </h4>
+        <span></span>
+        <div class="toolbar no-padding">
+            <div class="btn-group">
+                <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                <span class="btn btn-xs edit-session" data-toggle="modal" href="#edit-agenda-<%= f.object.id %>"><i class="icon-pencil"></i></span>
+                <span class="btn btn-xs" data-toggle="modal" href="#">
+                    <%= link_to raw('<i class="icon-trash"></i>'),  event_agenda_path(@event.id, f.object.id),  method: :delete, data: { confirm: 'Are you sure?' }, class:  'bs-tooltip', title: 'Delete'  %>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="widget-content">
+        <div class="btn-toolbar btn-toolbar-demo add-programme">
+            <div class="col-md-9">
+                <h4></h4>
+            </div>
+            <div class="col-md-3 align-right">
+                <button class="btn" data-toggle="modal" href="#add-programme-<%= f.object.id %>">
+                    <i class="icon-plus"></i> Add Programme
+                </button>
+            </div>
+        </div>
+
+        <%= render partial: 'agenda_edit',  locals: { f: f }%>
+
+        <% if f.object.programmes.present? %>
+            <%= f.fields_for :programmes, f.object.programmes.order("start_time ASC")  do |programme| %>
+                <%= render 'programme_fields', p: programme, f: f %>
+            <% end %>
+        <% else %>
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-reorder"></i></h4>
+                    <div class="toolbar no-padding">
+                        <div class="btn-group">
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content align-center">
+                    <p>You don't have any Programme for this agenda yet.</p>
+                </div>
+            </div>
+        <% end %>
+
+        <%= f.fields_for :programmes, f.object.programmes.build do |p| %>
+            <%= render partial: 'programme_new',  locals: { f: f, p: p } %>
+        <% end %>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".programme-pickatime-<%= f.object.id %>").pickatime({
+             min: ["<%= f.object.start_time.strftime('%k') if f.object.start_time.present? %>", "<%= f.object.start_time.strftime('%M') if f.object.end_time.present? %>"],
+            max: ["<%= f.object.end_time.strftime('%k') if f.object.start_time.present? %>", "<%= f.object.end_time.strftime('%M') if f.object.end_time.present? %>"],
+            interval: 5
+        })
+    });
+
+    $(document).ready(function(){
+        $(".pickatime").pickatime({
+            interval: 5
+        })
+    });
+</script>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Login | Event Management System</title>
+
+    <!--=== CSS ===-->
+
+    <!-- Bootstrap -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Theme -->
+    <link href="/assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/responsive.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/icons.css" rel="stylesheet" type="text/css" />
+
+    <!-- Login -->
+    <link href="/assets/css/login.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="/assets/css/fontawesome/font-awesome.min.css">
+    <!--[if IE 7]>
+        <link rel="stylesheet" href="../assets/css/fontawesome/font-awesome-ie7.min.css">
+    <![endif]-->
+
+    <!--[if IE 8]>
+        <link href="../assets/css/ie8.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+
+    <!--=== JavaScript ===-->
+
+    <script type="text/javascript" src="/assets/js/libs/jquery-1.10.2.min.js"></script>
+
+    <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/js/libs/lodash.compat.min.js"></script>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="../assets/js/libs/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Beautiful Checkboxes -->
+    <script type="text/javascript" src="/assets/uniform/jquery.uniform.min.js"></script>
+
+    <!-- Form Validation -->
+    <script type="text/javascript" src="/assets/validation/jquery.validate.min.js"></script>
+
+    <!-- Slim Progress Bars -->
+    <script type="text/javascript" src="/assets/nprogress/nprogress.js"></script>
+
+    <!-- App -->
+    <!--script type="text/javascript" src="../assets/js/login.js"></script-->
+    <script>
+    $(document).ready(function(){
+    //     "use strict";
+
+    //     Login.init(); // Init login JavaScript
+
+        $('.forgot-password-link').click(function(e) {
+            e.preventDefault(); // Prevent redirect to #
+
+            // $('.forgot-password-form').slideToggle(200);
+            // $('.inner-box .close').fadeToggle(200);
+        });
+
+        // Click on close-button
+        $('.inner-box .close').click(function() {
+            // Emulate click on forgot password link
+            // to reduce redundancy
+            $('.forgot-password-link').click();
+        });
+
+    });
+    </script>
+
+    <style type="text/css">
+        .logo-box{
+            width: 350px;
+            background-color: #00a4e6;
+            margin-top: 100px;
+        }
+        .login .logo {
+            padding: 0px !important;
+        }
+        .btn-primary {
+            border-color: #00a4e6 !important;
+            background-color: #00a4e6 !important;
+        }
+
+        .login .box {
+            border: 1px solid #00a4e6;
+            border-top: 5px solid #00a4e6;
+        }
+        .login .box .input-icon input {
+            border-left: 2px solid #00a4e6;
+        }
+        input:focus{
+              border-color: #00a4e6 !important;
+        }
+    </style>
+
+</head>
+
+<body class="login">
+    <!-- Logo -->
+    <div class="logo">
+        <div class="logo-box align-center">
+            <img src="/assets/img/logo-big.png" alt="logo" />
+        </div>
+    </div>
+    <!-- /Logo -->
+
+    <%= yield%>
+
+    <!-- Footer -->
+    <div class="footer">
+    </div>
+    <!-- /Footer -->
+</body>
+</html>

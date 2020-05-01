@@ -1,0 +1,26 @@
+<table class="table table-striped table-bordered table-checkable table-highlight-head table-no-inner-border table-hover">
+  <thead>
+    <tr>
+      <th class="align-center">Title</th>
+      <th class="align-center">File Name</th>
+      <th class="align-center">Created Date</th>
+      <th class="align-center">Created By</th>
+      <th class="align-center">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if files.present? %>
+      <% files.each do |file| %>
+        <tr class="align-center">
+          <td><%= file.title %></td>
+          <td><%= File.basename(file.file.path) %></td>
+          <td><%= file.created_at.try(:strftime, "%d-%m-%Y") %></td>
+          <td><%= file.user.try(:name) %></td>
+          <td><%= link_to raw('<i class="icon-trash"></i>'),  event_file_path(@event.id, file.id),  method: :delete, data: { confirm: 'Are you sure?' }, class:  'bs-tooltip', title: 'Delete', :remote => true %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr><td colspan="5" class="align-center">Files empty</td></tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,32 @@
+<div class="modal fade" id="new-file-dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for @file, url: event_files_path(@event.id), method: :post, html: {multipart: :true, class: "form-horizontal row-border", id: "event-general-form", :remote => true} do |f| %>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">New File</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="col-md-3 control-label">Title</label>
+            <div class="col-md-9 title">
+              <%= f.text_field :title, class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">File</label>
+            <div class="col-md-9 file">
+              <%= f.file_field :file, class: "form-control" %>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <%= f.submit "Save File", name: 'save', class: "btn btn-primary pull-right", data: { :disable_with => "Please wait..." }%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= javascript_include_tag 'custom/event_files/event_files_new_file' %>

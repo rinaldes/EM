@@ -1,0 +1,18 @@
+<% if @message.errors.blank? %>
+  $("#message-list").html('<%= escape_javascript(render("list", :messages => @messages)) %>');
+  if ($('#flash_notice').length > 0) $("#flash_notice").remove();
+  if ($("#main-content div.alert").hasClass('alert-danger')) $("#main-content div.alert").removeClass('alert-danger');
+  $("#main-content div.alert").addClass('alert-success');
+  $("#main-content div.alert").html("<p>Message was successfully updated.</p>")
+  $(".modal").modal("hide");
+  $("#main-content div.alert").show();
+<% else %>
+  $("div.form-group p").remove();
+  if ($(".form-group").hasClass('has-error')) $(".form-group").removeClass('has-error');
+  <% @message.errors.each do |key, error| %>
+    var error_msg = '<%= escape_javascript( error ) %>'
+    var error_key = '<%= escape_javascript( key.to_s ) %>'
+    $(".form-group div." + error_key).append('<p><i id="error-msg">' + error_msg + '</i></p>');
+    $(".form-group div." + error_key).parent().addClass('has-error');
+  <% end %>
+<% end %>

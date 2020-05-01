@@ -1,0 +1,28 @@
+<div class="form-group">
+  <label class="col-md-3 control-label">Message</label>
+  <div class="col-md-9 message">
+    <%= f.text_area :message, :class => "form-control", size: "60x6", :autofocus => true %>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-lg-3 control-label">Pilih User</label>
+  <div class="col-lg-9 multiple-choice pull-right user_ids">
+    <fieldset>
+      <div class="checkbox">
+        <%= check_box_tag nil, nil, false, :class => "selectAll"  %>
+        <label style="font-weight:bold;">Select All</label>
+      </div>
+      <hr style="margin:0;">
+      <% @users.each do |user| %>
+        <fieldset>
+          <div class="checkbox" style="margin-left:20px;">
+            <%= check_box_tag "message[user_ids][]", nil, @array_user_id.present? ? @array_user_id.include?(user.id) : false, :class => "CheckBox", :value => user.id %>
+            <label style="font-weight:bold;"><span><%= user.name %></span></label>
+          </div>
+        </fieldset>
+      <% end %>
+    </fieldset>
+  </div>
+</div>
+
+<%= javascript_include_tag 'custom/messages/messages_form' %>

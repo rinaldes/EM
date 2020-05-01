@@ -1,0 +1,33 @@
+<div class="widget box">
+    <div class="widget-header">
+        <h4><i class="icon-reorder"></i>
+            <%= p.object.title %>&nbsp;&nbsp;&nbsp;
+            <i class="icon-time"></i> <%= format_time(p.object.start_time) %> - <%= format_time(p.object.end_time)  %>&nbsp;&nbsp;&nbsp;
+        </h4>
+        <div class="toolbar no-padding">
+            <div class="btn-group">
+                <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                <span class="btn btn-xs edit-session" data-toggle="modal" href="#edit-programme-<%= p.object.id %>"><i class="icon-pencil"></i></span>
+                <span class="btn btn-xs" data-toggle="modal" href="#">
+                    <%#= link_to raw('<i class="icon-trash"></i>'),  programme_path(f.object.id),  method: :delete, data: { confirm: 'Are you sure?' }, class:  'bs-tooltip', title: 'Delete'  %>
+                    <%= link_to raw('<i class="icon-trash"></i>'),  event_programme_path(@event.id, p.object.id),  method: :delete, data: { confirm: 'Are you sure?' }, class:  'bs-tooltip', title: 'Delete'  %>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="widget-content align-center">
+        <div class="btn-toolbar btn-toolbar-demo">
+            <div class="row align-left">
+                <div class="col-md-12 ">
+                    <strong>Speaker : </strong>
+                    <%= p.object.speaker.try(:titleize) %>
+                </div>
+                <div class="col-md-12">
+                    <strong>Description : </strong>
+                    <%= p.object.description.try(:html_safe) %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%= render partial: 'programme_edit',  locals: { f: f , p:p} %>

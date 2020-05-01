@@ -1,0 +1,19 @@
+<div class="modal fade" id="event-agenda-dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <%= form_for @event, url: event_agendas_path(@event.id), html: {class: "form-horizontal row-border", id: "event-general-form"} do |agenda| %>
+                <%= agenda.fields_for :agendas, agenda.object.agendas.build do |f| %>
+                    <%= render partial: 'agenda_form',  locals: { f: f }%>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".pickatime").pickatime({
+            interval: 5
+        })
+    });
+</script>

@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-md-12">
+    <%= render 'events/page_header' %>
+    <!-- Tabs-->
+    <div class="tabbable tabbable-custom tabbable-full-width">
+      <%= render 'events/nav_tabs' %>
+      <div class="tab-content row">
+        <div class="tab-pane active" id="tab-event-general">
+          <!-- <div class="col-md-12"> -->
+          <div class="col-md-12 form-vertical no-margin">
+            <div class="widget">
+              <div class="widget-content">
+                <div class="row">
+                  <!--=== Advanced Table ===-->
+                  <div class="col-md-12">
+                    <div class="widget">
+                      <div class="widget-header no-border">
+                        <h4>Registration List</h4>
+                      </div>
+                      <div class="widget-content">
+                        <%= render 'list', :attendees => @attendees %>
+                        <div class="row">
+                          <div class="table-footer">
+                            <div class="col-md-6 pull-right"><%= paginate @attendees %></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /Advanced Table -->
+                </div>
+              </div> <!-- /.widget-content -->
+            </div> <!-- /.widget -->
+          </div> <!-- /.col-md-12 -->
+        </div>
+      </div> <!-- /.tab-content -->
+    </div>
+    <!--END TABS-->
+  </div>
+</div> <!-- /.row -->

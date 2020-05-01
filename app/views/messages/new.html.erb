@@ -1,0 +1,17 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <%= form_for @message, url: event_messages_path(@event.id), method: :post, html: {multipart: :false, class: "form-horizontal row-border", id: "event-general-form", :remote => true} do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">New Message</h4>
+      </div>
+      <div class="modal-body">
+        <%= render "form", :f => f %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <%= f.submit "Save Message", name: 'save', class: "btn btn-primary pull-right broadcastAction", data: { :disable_with => "Please wait..." }%>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+$("#question-list").html('<%= escape_javascript(render("list", :questions => @questions)) %>');
+if ($('#flash_notice').length > 0) $("#flash_notice").remove();
+if ($("#main-content div.alert").hasClass('alert-danger')) $("#main-content div.alert").removeClass('alert-danger');
+$("#main-content div.alert").addClass('alert-success');
+$("#main-content div.alert").html("<p>Question was successfully answered.</p>")
+$("#main-content div.alert").show();

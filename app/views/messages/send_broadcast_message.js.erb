@@ -1,0 +1,13 @@
+$("#message-list").html('<%= escape_javascript(render("list", :messages => @messages)) %>');
+<% if @broadcast.first.present? %>
+  $("#main-content div.alert").addClass('alert-danger');
+  var $danger = $( "<div class='has-error'/>" )
+  $("#main-content div.alert").append($danger);
+  $("#main-content div.alert div.has-error").css("color", "#CC0000")
+  $("#main-content div.alert div.has-error").html("<p><%= @broadcast.first %> Message fails broadcast to devices.</p>")
+<% else %>
+  $("#main-content div.alert").addClass('alert-success');
+  $("#main-content div.alert").html("<p>Message has been broadcast to devices successfully.</p>")
+<% end %>
+$(".modal").modal("hide");
+$("#main-content div.alert").show();

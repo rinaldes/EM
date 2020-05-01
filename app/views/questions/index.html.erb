@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-md-12">
+    <%= render 'events/page_header' %>
+    <!-- Tabs-->
+    <div class="tabbable tabbable-custom tabbable-full-width">
+      <%= render 'events/nav_tabs' %>
+      <div class="tab-content row">
+        <div class="tab-pane active" id="tab-event-general">
+          <!-- <div class="col-md-12"> -->
+          <div class="col-md-12 form-vertical no-margin">
+            <div class="widget">
+              <div class="widget-content">
+                <div class="row">
+                  <!--=== Advanced Table ===-->
+                  <div class="col-md-12">
+                    <div class="widget">
+                      <div class="widget-header no-border">
+                        <h4>Question List</h4>
+                      </div>
+                      <div class="widget-content">
+                        <div class="row">
+                          <div class="col-md-9">
+                            <div class="col-md-3" style="padding-left:0;">
+                              <label>
+                                <%= form_tag event_questions_path(@event.id), :method => 'get', :remote => true do %>
+                                  <%= hidden_field_tag :programme_id, params[:programme_id], :id => "programme-params" %>
+                                  <div class="input-group"><span class="input-group-addon"><i class="icon-search"></i></span>
+                                    <%= text_field_tag :search, params[:search], :class => "form-control", "aria-controls" => "DataTables_Table_0" %>
+                                  </div>
+                                <% end %>
+                              </label>
+                            </div>
+                            <div class="col-md-3">
+                              <%= select_tag :agenda_id, options_from_collection_for_select(@agendas, "id", "title"), :prompt => 'Select Agenda', :class => 'form-control', :onchange => "programmes(#{@event.id});" %>
+                            </div>
+                            <div class="col-md-3" id="programme">
+                              <%= select_tag :programme_id, nil, :prompt => 'Select Programme', :class => 'form-control' %>
+                            </div>
+                          </div>
+                        </div>
+                        <div id="question-list">
+                          <%= render 'list', :questions => @questions %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /Advanced Table -->
+                </div>
+              </div> <!-- /.widget-content -->
+            </div> <!-- /.widget -->
+          </div> <!-- /.col-md-12 -->
+        </div>
+      </div> <!-- /.tab-content -->
+    </div>
+    <!--END TABS-->
+  </div>
+</div> <!-- /.row -->
+
+<%= javascript_include_tag 'custom/questions/questions' %>

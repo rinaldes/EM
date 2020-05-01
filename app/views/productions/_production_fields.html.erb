@@ -1,0 +1,27 @@
+<tr class="nested-fields">
+    <td width="200">
+        <%= f.object.production_item.name %>
+    </td>
+    <td class="align-center" width="80">
+        <%= f.object.quantity %>
+    </td>
+    <% if @production_type == 'accomodation' %>
+        <td class="align-center" width="80">
+            <%= f.object.days %>
+        </td>
+    <% end %>
+    <td class="align-right" width="120">
+        <%= format_currency(f.object.price) %>
+    </td>
+    <td class="align-right" width="120">
+        <%= format_currency(f.object.total) %>
+    </td>
+    <td class="align-left">
+        <%= f.object.notes %>
+    </td>
+    <td class="align-center" width="80">
+        <a class="bs-tooltip" title="Edit" class="btn btn-xs" data-toggle="modal"  href="#edit-production-<%= f.object.id %>"><i class="icon-pencil"></i></a>
+        <%= link_to raw('<i class="icon-trash"></i>'),  event_production_path(@event.id, f.object.id),  method: :delete, data: { confirm: 'Are you sure?' }, class:  'bs-tooltip', title: 'Delete'  %>
+    </td>
+</tr>
+<%= render partial: 'edit_production',  locals: { f: f }%>
