@@ -83,7 +83,7 @@ gem "ckeditor"
 # gem "gritter", "1.1.0"
 
 # gem 'domp', '0.0.7'
-gem 'omniauth', '1.2.1'
+gem 'omniauth', '1.4.3'
 # gem 'omniauth-facebook', '1.6.0'
 # gem 'omniauth-linkedin', '0.1.0'
 
